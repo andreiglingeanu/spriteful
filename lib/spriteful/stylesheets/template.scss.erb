@@ -45,7 +45,6 @@
 <% else %>
   <% sprite.each_image do |image| %>
     <%= extension_prefix %><%= class_name_for(sprite) %>-sprite-<%= class_name_for(image) %> {
-      <%= extension_strategy %><%= class_name_for(sprite) %>-sprite;
       background-image: <%= data_uri(image) %>;
     }
 
