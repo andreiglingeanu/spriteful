@@ -9,15 +9,16 @@
  *  <div class='<%= class_name_for(sprite) %> <%= class_name_for(sprite.images.first) %>'>Your markup here.</div>
  */
 
-.<%= class_name_for(sprite) %> {
-  <% if rails? -%>
-  background-image: url(<%%= image_url('<%= image_url(sprite) %>') %>);
-  <% else -%>
-  background-image: url(<%= image_url(sprite) %>);
-  <% end -%>
-  background-repeat: no-repeat;
-}
-<% sprite.each_image do |image| %>
+<% unless base64? %>
+  .<%= class_name_for(sprite) %> {
+    <% if rails? -%>
+    background-image: url(<%%= image_url('<%= image_url(sprite) %>') %>);
+    <% else -%>
+    background-image: url(<%= image_url(sprite) %>);
+    <% end -%>
+    background-repeat: no-repeat;
+  }
+  <% sprite.each_image do |image| %>
 .<%= class_name_for(sprite) %>.<%= class_name_for(image) %> {
   background-position: <%= image.left %>px <%= image.top %>px;
 }
@@ -27,4 +28,17 @@
   background-position: 0 0;
 }
 <% end -%>
+  <% end %>
+<% else %>
+  <% sprite.each_image do |image| %>
+    .<%= class_name_for(sprite) %>.<%= class_name_for(image) %> {
+      background-image: <%= data_uri(image) %>;
+    }
+
+    <% if image.svg? %>
+    .svg .<%= class_name_for(sprite) %>.<%= class_name_for(image) %> {
+      background-image: url(<%= data_uri(image) %>);
+    }
+  <% end -%>
+  <% end %>
 <% end %>

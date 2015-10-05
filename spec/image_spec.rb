@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Spriteful::Image do
   let(:filename) { 'path/to/image.png' }
-  let(:source_image) { double('Magick Image', base_filename: filename, columns: 10, rows: 5) }
+  let(:source_image) { double('Magick Image', mime_type: 'image/svg+xml', base_filename: filename, columns: 10, rows: 5) }
   let(:optimize) { true }
   subject(:image) { Spriteful::Image.new(source_image, optimize) }
 

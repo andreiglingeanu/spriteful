@@ -24,6 +24,7 @@ module Spriteful
     #                 :format - the Stylesheet format.
     #                 :mixin  - Use mixins instead of Placeholder selector in the SCSS format.
     #                 :rails  - A flag to generate Asset Pipeline compatible Stylesheets.
+    #                 :base64 - A flat to embed base64 images into Stylesheets
     def initialize(sprite, destination, options = {})
       @sprite = sprite
       @options = options

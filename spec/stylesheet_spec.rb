@@ -92,6 +92,27 @@ describe Spriteful::Stylesheet do
       end
     end
 
+    describe 'Base64' do
+      context 'css' do
+        it 'renders the CSS for the given sprite' do
+          options = { format: 'css', base64: true }
+          stylesheet = Spriteful::Stylesheet.new(sprite, destination, options)
+          output = stylesheet.render
+
+          expect(output).to match(/data:/)
+        end
+      end
+
+      context 'scss' do
+        it 'renders the SCSS with base64 embeded' do
+          stylesheet = Spriteful::Stylesheet.new(sprite, destination, base64: true, format: 'scss')
+          output = stylesheet.render
+
+          expect(output).to match(/data:/)
+        end
+      end
+    end
+
     describe 'Custom templates' do
       it 'renders the CSS using a custom template' do
         stylesheet = Spriteful::Stylesheet.new(sprite, destination, format: 'scss', template: template)

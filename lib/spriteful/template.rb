@@ -67,6 +67,11 @@ module Spriteful
       !!@options[:mixin]
     end
 
+    # Public: Gets the ':base64' flag.
+    def base64?
+      !!@options[:base64]
+    end
+
     # Public: Gets the ':rails' flag.
     def rails?
       !!@options[:rails]
@@ -95,9 +100,8 @@ module Spriteful
     #
     # Returns a String.
     def data_uri(image)
-      if image.svg?
-        "'data:image/svg+xml;base64,#{Base64.encode64(image.blob).gsub(/\r?\n/, '')}'"
-      end
+      mime_type = image.svg? ? 'image/svg+xml' : image.mime_type
+      "'data:#{mime_type};base64,#{Base64.encode64(image.blob).gsub(/\r?\n/, '')}'"
     end
 
     # Public: Renders the given source ERB template string in the context of the

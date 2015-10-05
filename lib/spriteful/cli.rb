@@ -18,6 +18,7 @@ module Spriteful
 
     class_option :mixin, type: :boolean, desc: 'Choose to use the Mixin Directives instead of Placeholder Selectors.'
     class_option :rails, type: :boolean, desc: 'Follow default conventions for a Rails application with the Asset Pipeline.'
+    class_option :base64, type: :boolean, desc: 'Embed images directly in css.'
     class_option :horizontal, type: :boolean, desc: 'Change the sprite orientation to "horizontal".'
     class_option :save, type: :boolean, desc: 'Save the supplied arguments to ".spritefulrc".'
     class_option :spacing, type: :numeric, desc: 'Add spacing between the images in the sprite.'
@@ -122,6 +123,7 @@ module Spriteful
       {
         root: options.root,
         format: options.format,
+        base64: options.base64?,
         rails: options.rails?,
         mixin: options.mixin?,
         template: template,

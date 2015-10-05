@@ -22,6 +22,9 @@ module Spriteful
     # Public: Gets/sets the left position of the image in a sprite.
     attr_accessor :left
 
+    # Public: Gets the mime_type for the image
+    attr_reader :mime_type
+
     # Public: Gets the source 'Magick::Image'.
     attr_reader :source
 
@@ -37,6 +40,7 @@ module Spriteful
       @width  = magick_image.columns
       @height = magick_image.rows
       @optimize = optimize
+      @mime_type = magick_image.mime_type
 
       @top    = 0
       @left   = 0
@@ -61,6 +65,8 @@ module Spriteful
 
     def read_blob
       contents = File.read(path)
+      return contents
+
       if @optimize
         SvgOptimizer.optimize(contents)
       else
